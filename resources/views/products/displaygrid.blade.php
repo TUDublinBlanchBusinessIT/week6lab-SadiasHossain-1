@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('content')
 <div style="padding-top:1%">
     <nav class="navbar navbar-right navbar-expand-sm navbar-dark bg-dark">
         <ul class="navbar-nav ms-auto">
@@ -10,7 +11,6 @@
         <ul>
     </nav>
 </div>
-@section('content')
 @include('flash::message')
     <div class='d-flex flex-wrap align-content-start bg-light'>
     @foreach($products as $product)
@@ -23,13 +23,15 @@
         </div>
     @endforeach
     </div>
+
+<script>
     $(".bth,.addItem").click(function() {
     var total = parseInt($('#shoppingcart').text());
     var i=$(this).val();
     $('#shoppingcart').text(total);
     $.ajax({
       type: "get",
-      url: "{{url('products/additem/')}}" + "/" + i,
+      url: "{{url('product/additem/')}}" + "/" + i,
       type: "GET",
       success: function(response) {
           total=total+1;
@@ -40,5 +42,6 @@
       }
     });
 });
+</script>
 @endsection('content')
 
